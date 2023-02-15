@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
 	char tabuleiro[8][8], pecaSaiu, pretaSaiu[16] = {'x'}, brancaSaiu[16] = {'x'}, *bf, *pf, pOrigem, pFinal;
 
-	int i, j, pol, poc, lpd, cpd, player = 1;
+	int i, j, pol, poc, pfl, pfc, player = 1;
 
 	pf = pretaSaiu;
 
@@ -138,17 +138,17 @@ int main(int argc, char *argv[])
 
 					printf("Linha : ");
 
-					scanf("%i", &lpd);
+					scanf("%i", &pfl);
 
 					printf("Coluna: ");
 
-					scanf("%i", &cpd);
+					scanf("%i", &pfc);
 
-					--lpd;
+					--pfl;
 
-					--cpd;
+					--pfc;
 
-					if (isupper(tabuleiro[lpd][cpd]))
+					if (isupper(tabuleiro[pfl][pfc]))
 					{
 
 						printf("Cê é o branco sô!!\n");
@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 						printf("Digite novamente\n");
 					}
 
-				} while (isupper(tabuleiro[lpd][cpd]));
+				} while (isupper(tabuleiro[pfl][pfc]));
 
 				player = 2;
 			}
@@ -198,17 +198,17 @@ int main(int argc, char *argv[])
 
 					printf("Linha : ");
 
-					scanf("%i", &lpd);
+					scanf("%i", &pfl);
 
 					printf("Coluna: ");
 
-					scanf("%i", &cpd);
+					scanf("%i", &pfc);
 
-					--lpd;
+					--pfl;
 
-					--cpd;
+					--pfc;
 
-					if (!isupper(tabuleiro[lpd][cpd]))
+					if (!isupper(tabuleiro[pfl][pfc]))
 					{
 
 						printf("Cê é o preto sô!!n");
@@ -233,7 +233,7 @@ int main(int argc, char *argv[])
 
 		vPeca(pOrigem);
 
-		pFinal = tabuleiro[lpd][cpd];
+		pFinal = tabuleiro[pfl][pfc];
 
 		printf("Você escolheu: ");
 
@@ -241,19 +241,19 @@ int main(int argc, char *argv[])
 
 		printf("peca dest %c peca or %c \n", pFinal, pOrigem);
 
-		if (!isupper(tabuleiro[lpd][cpd]) && isupper(tabuleiro[pol][poc]) && player == 2)
+		if (!isupper(tabuleiro[pfl][pfc]) && isupper(tabuleiro[pol][poc]) && player == 2)
 		{
 
-			pecaSaiu = tabuleiro[lpd][cpd];
+			pecaSaiu = tabuleiro[pfl][pfc];
 
-			if (tabuleiro[lpd][cpd] == 'k')
+			if (tabuleiro[pfl][pfc] == 'k')
 
 				printf("\n\nXEQUE MATE!!!\n\n");
 
-			else if (tabuleiro[lpd][cpd] == ' ')
+			else if (tabuleiro[pfl][pfc] == ' ')
 			{
 
-				tabuleiro[lpd][cpd] = pOrigem;
+				tabuleiro[pfl][pfc] = pOrigem;
 
 				tabuleiro[pol][poc] = ' ';
 			}
@@ -261,25 +261,25 @@ int main(int argc, char *argv[])
 			else
 			{
 
-				tabuleiro[lpd][cpd] = pOrigem;
+				tabuleiro[pfl][pfc] = pOrigem;
 
 				tabuleiro[pol][poc] = ' ';
 			}
 		}
 
-		if (isupper(tabuleiro[lpd][cpd]) && !isupper(tabuleiro[pol][poc]) && player == 1)
+		if (isupper(tabuleiro[pfl][pfc]) && !isupper(tabuleiro[pol][poc]) && player == 1)
 		{
 
-			pecaSaiu = tabuleiro[lpd][cpd];
+			pecaSaiu = tabuleiro[pfl][pfc];
 
-			if (tabuleiro[lpd][cpd] == 'K')
+			if (tabuleiro[pfl][pfc] == 'K')
 
 				printf("\n\nXEQUE MATE!!!\n\n");
 
-			else if (tabuleiro[lpd][cpd] == ' ')
+			else if (tabuleiro[pfl][pfc] == ' ')
 			{
 
-				tabuleiro[lpd][cpd] = pOrigem;
+				tabuleiro[pfl][pfc] = pOrigem;
 
 				tabuleiro[pol][poc] = ' ';
 			}
@@ -287,7 +287,7 @@ int main(int argc, char *argv[])
 			else
 			{
 
-				tabuleiro[lpd][cpd] = pOrigem;
+				tabuleiro[pfl][pfc] = pOrigem;
 
 				tabuleiro[pol][poc] = ' ';
 			}
