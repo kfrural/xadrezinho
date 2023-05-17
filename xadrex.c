@@ -2,24 +2,15 @@
 #include <locale.h>
 #include <ctype.h>
 
-int main(int argc, char *argv[])
-
-{
+int main(int argc, char *argv[]){
 
 	setlocale(LC_ALL, "portugues");
-
 	void vPeca(char peca);
-
 	void vTabuleiro(char peca[8][8]);
-
 	char saiu(char pecaSaiu, char *pf, char *bf);
-
 	char tabuleiro[8][8], pecaSaiu, pretaSaiu[16] = {'x'}, brancaSaiu[16] = {'x'}, *bf, *pf, pOrigem, pFinal;
-
 	int i, j, pol, poc, pfl, pfc, player = 1;
-
 	pf = pretaSaiu;
-
 	bf = brancaSaiu;
 
 	tabuleiro[0][0] = 'T'; // torre
@@ -57,382 +48,192 @@ int main(int argc, char *argv[])
 
 	printf("\n\n\n\n \t\t|\t\t P=Peao\t\t\t|\n\t\t|\t\t T=Torre\t\t|\n\t\t|\t\t C=Cavalo\t\t|\n\t\t|\t\t B=Bispo\t\t|\n\t\t|\t\t K=Rei\t\t\t|\n\t\t|\t\t Q=Rainha\t\t|\n\t\t\t\t\n");
 
-	for (i = 2; i < 6; i++)
-	{
-
-		for (j = 0; j < 8; j++)
-		{
-
+	for (i = 2; i < 6; i++){
+		for (j = 0; j < 8; j++){
 			tabuleiro[i][j] = ' ';
 		}
 	}
-
-	do
-	{
-
+	do{
 		vTabuleiro(tabuleiro);
-
-		do
-		{
-
-			if (player == 1)
-			{
-
+		do{
+			if (player == 1){
 				printf("\t\t Maiuscula = Branca e minuscula = Preta\n\n");
-
 				printf("JOGADOR 01\nEscolha uma peça Branca aí sô\n");
-
-				do
-				{
-
+				do{
 					printf("Linha : ");
-
 					scanf("%i", &pol);
-
 					printf("Coluna: ");
-
 					scanf("%i", &poc);
-
 					--pol;
-
 					--poc;
-
-					if (!isupper(tabuleiro[pol][poc]))
-					{
-
+					if (!isupper(tabuleiro[pol][poc])){
 						printf("Cê é o branco sô!!\n");
-
 						printf("Digite novamente\n");
 					}
-
 				} while (!isupper(tabuleiro[pol][poc]));
-
-				do
-				{
-
+				do{
 					printf("\nEscolha onde cê quer a peça\n");
-
 					printf("Linha : ");
-
 					scanf("%i", &pfl);
-
 					printf("Coluna: ");
-
 					scanf("%i", &pfc);
-
 					--pfl;
-
 					--pfc;
-
-					if (isupper(tabuleiro[pfl][pfc]))
-					{
-
+					if (isupper(tabuleiro[pfl][pfc])){
 						printf("Cê é o preto sô!!\n");
-
 						printf("Digite novamente\n");
 					}
-
 				} while (isupper(tabuleiro[pfl][pfc]));
-
 				player = 2;
-			}
-
-			else
-			{
-
+			}else{
 				printf("JOGADOR 02\nEscolha uma peça preto aí sô\n");
-
-				do
-				{
-
+				do{
 					printf("Linha : ");
-
 					scanf("%i", &pol);
-
 					printf("Coluna: ");
-
 					scanf("%i", &poc);
-
 					--pol;
-
 					--poc;
-
-					if (isupper(tabuleiro[pol][poc]))
-					{
-
+					if (isupper(tabuleiro[pol][poc])){
 						printf("Cê é o preto sô!!\n");
-
 						printf("Digite novamente\n");
 					}
-
-				} while (isupper(tabuleiro[pol][poc]));
-
-				do
-				{
-
+				}while(isupper(tabuleiro[pol][poc]));
+				do{
 					printf("\nEscolha onde cê quer a peça\n");
-
 					printf("Linha : ");
-
 					scanf("%i", &pfl);
-
 					printf("Coluna: ");
-
 					scanf("%i", &pfc);
-
 					--pfl;
-
 					--pfc;
-
 					if (!isupper(tabuleiro[pfl][pfc]))
 					{
-
 						printf("Cê é o branco sô!!n");
-
 						printf("Digite novamente\n");
 					}
-
 				} while (isupper(tabuleiro[pol][poc]));
-
 				player = 1;
 			}
-
 			if (tabuleiro[pol][poc] == ' ')
-
 				printf("\nNum tem essa posição não sô\n");
-
 		} while (tabuleiro[pol][poc] == ' ');
-
 		pOrigem = tabuleiro[pol][poc];
-
 		printf("Você escolheu: ");
-
 		vPeca(pOrigem);
-
 		pFinal = tabuleiro[pfl][pfc];
-
 		printf("Você escolheu: ");
-
 		vPeca(pFinal);
-
 		printf("peca dest %c peca or %c \n", pFinal, pOrigem);
-
-		if (!isupper(tabuleiro[pfl][pfc]) && isupper(tabuleiro[pol][poc]) && player == 2)
-		{
-
+		if (!isupper(tabuleiro[pfl][pfc]) && isupper(tabuleiro[pol][poc]) && player == 2){
 			pecaSaiu = tabuleiro[pfl][pfc];
-
 			if (tabuleiro[pfl][pfc] == 'k')
-
 				printf("\n\nXEQUE MATE!!!\n\n");
-
-			else if (tabuleiro[pfl][pfc] == ' ')
-			{
-
+			else if (tabuleiro[pfl][pfc] == ' '){
 				tabuleiro[pfl][pfc] = pOrigem;
-
 				tabuleiro[pol][poc] = ' ';
-			}
-
-			else
-			{
-
+			}else{
 				tabuleiro[pfl][pfc] = pOrigem;
-
 				tabuleiro[pol][poc] = ' ';
 			}
 		}
-
-		if (isupper(tabuleiro[pfl][pfc]) && !isupper(tabuleiro[pol][poc]) && player == 1)
-		{
-
+		if (isupper(tabuleiro[pfl][pfc]) && !isupper(tabuleiro[pol][poc]) && player == 1){
 			pecaSaiu = tabuleiro[pfl][pfc];
-
 			if (tabuleiro[pfl][pfc] == 'K')
-
 				printf("\n\nXEQUE MATE!!!\n\n");
-
-			else if (tabuleiro[pfl][pfc] == ' ')
-			{
-
+			else if (tabuleiro[pfl][pfc] == ' '){
 				tabuleiro[pfl][pfc] = pOrigem;
-
 				tabuleiro[pol][poc] = ' ';
-			}
-
-			else
-			{
-
+			}else{
 				tabuleiro[pfl][pfc] = pOrigem;
-
 				tabuleiro[pol][poc] = ' ';
 			}
 		}
-
 		printf("Cê removeu: ");
-
 		vPeca(pecaSaiu);
-
-		saiu(pecaSaiu, pf, bf);
-
+		saiu(pecaSaiu, bf, pf);
 		printf("peças retirada foi %c \n", pecaSaiu);
-
 	} while (pecaSaiu != 'k' || pecaSaiu != 'K');
 }
 
-void vTabuleiro(char peca[8][8])
-{
-
+void vTabuleiro(char peca[8][8]){
 	int i, j;
-
 	printf("\n\nPeças brancas\n");
-
 	printf("    1   2   3   4   5   6   7   8\n");
-
 	printf("  --------------------------------\n");
-
-	for (i = 0; i < 8; i++)
-	{
-
+	for (i = 0; i < 8; i++){
 		printf("%i| ", i + 1);
-
-		for (j = 0; j < 8; j++)
-		{
-
+		for (j = 0; j < 8; j++){
 			printf("[%c] ", peca[i][j]);
 		}
-
 		printf("\n");
 	}
-
 	printf("Peças pretas\n\n");
 }
 
-void vPeca(char peca)
-{
-
+void vPeca(char peca){
 	printf("\n");
-
-	switch (peca)
-	{
-
+	switch (peca){
 	case 'T':
-
 		printf("Torre branca");
-
 		break;
-
 	case 'C':
-
-		printf("Cavalo branco");
-
-		break;
-
+        printf("Cavalo branco");
+        break;
 	case 'B':
-
 		printf("Bispo branco");
-
 		break;
-
 	case 'Q':
-
 		printf("Rainha branca");
-
 		break;
-
 	case 'K':
-
 		printf("Rei branco");
-
 		break;
-
 	case 'P':
-
 		printf("Peão branco");
-
 		break;
-
 	case 't': // minusculas branca
 		printf("Torre preto");
-
 		break;
-
 	case 'c':
-
 		printf("Cavalo preto");
-
 		break;
-
 	case 'b':
-
 		printf("Bispo preto");
-
 		break;
-
 	case 'q':
-
 		printf("Rainha preto");
-
 		break;
-
 	case 'k':
-
 		printf("Rei preto");
-
 		break;
-
 	case 'p':
-
 		printf("Peão preto");
-
 		break;
 	}
-
 	printf("\n");
 }
 
-char saiu(char peca, char *pf, char *bf)
-{
-
-	int i = 0, nBretiradas = 0, nPretiradas = 0;
-
+char saiu(char peca, char *bf, char *pf){
+	int i = 0, nPretiradas = 0, nBretiradas = 0;
 	if (isupper(peca))
 	{
-
-		nPretiradas++;
-
-		printf("Brancas Retiradas: %i: ", nPretiradas);
-
-		for (i = 0; i < nPretiradas; i++)
-		{
-
-			if (pf[i] == 'x')
-
-				pf[i] = peca;
-
-			printf("[%c]", pf[i]);
-		}
-	}
-
-	else
-	{
-
 		nBretiradas++;
-
-		printf("pretas Retiradas: %i: ", nBretiradas);
-
-		for (i = 0; i < nBretiradas; i++)
-		{
-
+		printf("Brancas Retiradas: %i: ", nBretiradas);
+		for (i = 0; i < nBretiradas; i++){
 			if (bf[i] == 'x')
-
 				bf[i] = peca;
-
 			printf("[%c]", bf[i]);
-
+		}
+	}else{
+		nPretiradas++;
+		printf("pretas Retiradas: %i: ", nPretiradas);
+		for (i = 0; i < nPretiradas; i++){
+			if (pf[i] == 'x')
+				pf[i] = peca;
+			printf("[%c]", pf[i]);
 			i++;
 		};
 	}
-
 	printf("\n");
 }
