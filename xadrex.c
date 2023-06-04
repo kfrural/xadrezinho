@@ -68,7 +68,7 @@ char saiu(char peca, char *bf, char *pf){
 		for (int i=0;i<nBretiradas;i++){
 			if (bf[i] == 'x')
 				bf[i] = peca;
-			printf("[%c]", bf[i]);
+			printf("%c", bf[i]);
 		}
 	}else{
 		nPretiradas++;
@@ -76,7 +76,7 @@ char saiu(char peca, char *bf, char *pf){
 		for (int i=0;i<nPretiradas;i++){
 			if (pf[i] == 'x')
 				pf[i] = peca;
-			printf("[%c]", pf[i]);
+			printf("%c", pf[i]);
 		};
 	}
 	printf("\n");
@@ -212,12 +212,12 @@ int main(int argc, char *argv[]){
 				printf("\nNum tem essa posição não sô\n");
 		}while(tabuleiro[pol][poc] == ' ');
 		pOrigem = tabuleiro[pol][poc];
-		printf("Você escolheu: ");
+		printf("Cê escolheu: ");
 		vPeca(pOrigem);
 		pFinal = tabuleiro[pfl][pfc];
-		printf("Você escolheu: ");
+		printf("Cê escolheu: ");
 		vPeca(pFinal);
-		printf("peca dest %c peca or %c \n", pFinal, pOrigem);
+		printf("peca final %c e origem %c \n", pFinal, pOrigem);
 		if(!isupper(tabuleiro[pfl][pfc]) && isupper(tabuleiro[pol][poc]) && player == 2){
 			pecaSaiu = tabuleiro[pfl][pfc];
 			if(tabuleiro[pfl][pfc] == 'k')
