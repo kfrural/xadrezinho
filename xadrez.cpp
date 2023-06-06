@@ -1,7 +1,8 @@
 #include <iostream>
-#include <ctype.h>
+#include<stdlib.h>
 
 using namespace std;
+
 void vTabuleiro(char peca[8][8]){
 	cout<<"\n\nPeças brancas"<<endl;
 	cout<<"    1   2   3   4   5   6   7   8"<<endl;
@@ -15,7 +16,6 @@ void vTabuleiro(char peca[8][8]){
 	}
 	cout<<"Peças pretas\n"<<endl;
 }
-
 void vPeca(char peca){
 	cout<<"\n"<<endl;
 	switch (peca){
@@ -58,26 +58,25 @@ void vPeca(char peca){
 	}
 	cout<<endl;
 }
-void saiu(char peca, char *bf, char *pf){
-	int nPretiradas=0;
-	int nBretiradas=0;
-	if (isupper(peca))//verifica se esse trem ta maiusculo ou n
-	{
-		nBretiradas++;
-		cout<<"Brancas Retiradas: "<<nBretiradas<<endl;
-		for (int i=0;i<nBretiradas;i++){
-			if (bf[i] == 'x')
-				bf[i] = peca;
-			cout<<"[%c]"<<bf[i]<<endl;
+void saiu(char peca, char *brancaFora, char *pretaFora){
+	int pretasRetiradas=0;
+	int brancasRetiradas=0;
+	if (isupper(peca)){//verifica se esse trem ta maiusculo ou n
+		brancasRetiradas++;
+		cout<<"Brancas Retiradas: "<<brancasRetiradas<<endl;
+		for (int i=0;i<brancasRetiradas;i++){
+			if (brancaFora[i] == 'x')
+				brancaFora[i] = peca;
+			cout<<brancaFora[i]<<endl;
 		}
 	}else{
-		nPretiradas++;
-		cout<<"pretas Retiradas: "<<nPretiradas<<endl;
-		for (int i=0;i<nPretiradas;i++){
-			if (pf[i] == 'x')
-				pf[i] = peca;
-			cout<<"[%c]"<<pf[i]<<endl;
-		};
+		pretasRetiradas++;
+		cout<<"pretas Retiradas: "<<pretasRetiradas<<endl;
+		for (int i=0;i<pretasRetiradas;i++){
+			if (pretaFora[i] == 'x')
+				pretaFora[i] = peca;
+			cout<<pretaFora[i]<<endl;
+		}
 	}
 	cout<<endl;
 }
@@ -91,18 +90,18 @@ int main()
 	char pecaSaiu;
 	char pretaSaiu[16] = {'x'};
 	char brancaSaiu[16] = {'x'};
-	char *bf;
-	char *pf;
+	char *brancaFora;
+	char *pretaFora;
 	char pOrigem;
 	char pFinal;
-	int pol=0;
-	int poc=0;
-	int pfl=0;
-	int pfc=0;
+	int pecaOrigemLinha=0;
+	int pecaOrigemColuna=0;
+	int pecaFinalLinha=0;
+	int pecaFinalColuna=0;
 	int player=1;
-	pf = pretaSaiu;
-	bf = brancaSaiu;
-
+	pretaFora = pretaSaiu;
+	brancaFora = brancaSaiu;
+	
 	tabuleiro[0][0] = 'T'; // torre
 	tabuleiro[0][1] = 'C'; // cavalo
 	tabuleiro[0][2] = 'B'; // bispo
@@ -135,115 +134,112 @@ int main()
 	tabuleiro[7][5] = 'b';
 	tabuleiro[7][6] = 'c';
 	tabuleiro[7][7] = 't';
-
+	
 	cout<<"\n\n\n\n \t\t|\t\t P=Peao\t\t\t|\n\t\t|\t\t T=Torre\t\t|\n\t\t|\t\t C=Cavalo\t\t|\n\t\t|\t\t B=Bispo\t\t|\n\t\t|\t\t K=Rei\t\t\t|\n\t\t|\t\t Q=Rainha\t\t|\n\t\t\t\t"<<endl;
-
+	
 	for (int i=2;i<6;i++){
 		for (int j=0;j<8;j++){
 			tabuleiro[i][j] = ' ';
 		}
 	}
+	
 	do{
-		vTabuleiro(tabuleiro);
-		do{
+	    vTabuleiro(tabuleiro);
+	    do{
 			if (player == 1){
 				cout<<"\t\t Maiuscula = Branca e minuscula = Preta\n"<<endl;
 				cout<<"JOGADOR 01\nEscolha uma peça Branca aí sô"<<endl;
 				do{
 					cout<<"Linha : ";
-					cin>>pol;
+					cin>>pecaOrigemLinha;
 					cout<<"Coluna: ";
-					cin>>poc;
-					--pol;
-					--poc;
-					if (!isupper(tabuleiro[pol][poc])){
+					cin>>pecaOrigemColuna;
+					--pecaOrigemLinha;
+					--pecaOrigemColuna;
+					if (!isupper(tabuleiro[pecaOrigemLinha][pecaOrigemColuna])){
 						cout<<"Cê é o branco sô!!"<<endl;
 						cout<<"Digite novamente"<<endl;
 					}
-				} while (!isupper(tabuleiro[pol][poc]));
+				} while (!isupper(tabuleiro[pecaOrigemLinha][pecaOrigemColuna]));
 				do{
 					cout<<"\nEscolha onde cê quer a peça"<<endl;
 					cout<<"Linha : ";
-					cin>>pfl;
+					cin>>pecaFinalLinha;
 					cout<<"Coluna: ";
-					cin>>pfc;
-					--pfl;
-					--pfc;
-					if (isupper(tabuleiro[pfl][pfc])){
+					cin>>pecaFinalColuna;
+					--pecaFinalLinha;
+					--pecaFinalColuna;
+					if (isupper(tabuleiro[pecaFinalLinha][pecaFinalColuna])){
 						cout<<"Cê é o preto sô!!"<<endl;
 						cout<<"Digite novamente"<<endl;
 					}
-				} while (isupper(tabuleiro[pfl][pfc]));
+				} while (isupper(tabuleiro[pecaFinalLinha][pecaFinalColuna]));
 				player=2;
+				system("clear");
 			}else{
 				cout<<"JOGADOR 02\nEscolha uma peça preto aí sô"<<endl;
 				do{
 					cout<<"Linha : ";
-					cin>>pol;
+					cin>>pecaOrigemLinha;
 					cout<<"Coluna: ";
-					cin>>poc;
-					--pol;
-					--poc;
-					if (isupper(tabuleiro[pol][poc])){
+					cin>>pecaOrigemColuna;
+					--pecaOrigemLinha;
+					--pecaOrigemColuna;
+					if (isupper(tabuleiro[pecaOrigemLinha][pecaOrigemColuna])){
 						cout<<"Cê é o preto sô!!"<<endl;
 						cout<<"Digite novamente"<<endl;
 					}
-				}while(isupper(tabuleiro[pol][poc]));
+				}while(isupper(tabuleiro[pecaOrigemLinha][pecaOrigemColuna]));
 				do{
 					cout<<"\nEscolha onde cê quer a peça"<<endl;
 					cout<<"Linha : ";
-					cin>>pfl;
+					cin>>pecaFinalLinha;
 					cout<<"Coluna: ";
-					cin>>pfc;
-					--pfl;
-					--pfc;
-					if(!isupper(tabuleiro[pfl][pfc]))
-					{
+					cin>>pecaFinalColuna;
+					--pecaFinalLinha;
+					--pecaFinalColuna;
+					if(!isupper(tabuleiro[pecaFinalLinha][pecaFinalColuna])){
 						cout<<"Cê é o branco sô!"<<endl;
 						cout<<"Digite novamente"<<endl;
 					}
-				}while(isupper(tabuleiro[pol][poc]));
+				}while(isupper(tabuleiro[pecaFinalLinha][pecaFinalColuna]));
 				player=1;
+				system("clear");
 			}
-			if (tabuleiro[pol][poc] == ' ')
+			if (tabuleiro[pecaOrigemLinha][pecaOrigemColuna] == ' ')
 				cout<<"\nNum tem essa posição não sô"<<endl;
-		} while (tabuleiro[pol][poc] == ' ');
-		pOrigem = tabuleiro[pol][poc];
-		cout<<"Você escolheu: ";
-		vPeca(pOrigem);
-		pFinal = tabuleiro[pfl][pfc];
-		cout<<"Você escolheu: ";
-		vPeca(pFinal);
-		if (!isupper(tabuleiro[pfl][pfc]) && isupper(tabuleiro[pol][poc]) && player == 2){
-			pecaSaiu = tabuleiro[pfl][pfc];
-			if (tabuleiro[pfl][pfc] == 'k')
+		}while(tabuleiro[pecaOrigemLinha][pecaOrigemColuna] == ' ');
+		pOrigem = tabuleiro[pecaOrigemLinha][pecaOrigemColuna];
+		pFinal = tabuleiro[pecaFinalLinha][pecaFinalColuna];
+		if (!isupper(tabuleiro[pecaFinalLinha][pecaFinalColuna]) && isupper(tabuleiro[pecaOrigemLinha][pecaOrigemColuna]) && player == 2){
+			pecaSaiu = tabuleiro[pecaFinalLinha][pecaFinalColuna];
+			if (tabuleiro[pecaFinalLinha][pecaFinalColuna] == 'k')
 				cout<<"\n\nXEQUE MATE!!!\n"<<endl;
-			else if (tabuleiro[pfl][pfc] == ' '){
-				tabuleiro[pfl][pfc] = pOrigem;
-				tabuleiro[pol][poc] = ' ';
+			else if (tabuleiro[pecaFinalLinha][pecaFinalColuna] == ' '){
+				tabuleiro[pecaFinalLinha][pecaFinalColuna] = pOrigem;
+				tabuleiro[pecaOrigemLinha][pecaOrigemColuna] = ' ';
 			}else{
-				tabuleiro[pfl][pfc] = pOrigem;
-				tabuleiro[pol][poc] = ' ';
+				tabuleiro[pecaFinalLinha][pecaFinalColuna] = pOrigem;
+				tabuleiro[pecaOrigemLinha][pecaOrigemColuna] = ' ';
 			}
 		}
-		if (isupper(tabuleiro[pfl][pfc]) && !isupper(tabuleiro[pol][poc]) && player == 1){
-			pecaSaiu = tabuleiro[pfl][pfc];
-			if (tabuleiro[pfl][pfc] == 'K')
+		
+		if (isupper(tabuleiro[pecaFinalLinha][pecaFinalColuna]) && !isupper(tabuleiro[pecaOrigemLinha][pecaOrigemColuna]) && player == 1){
+			pecaSaiu = tabuleiro[pecaFinalLinha][pecaFinalColuna];
+			if (tabuleiro[pecaFinalLinha][pecaFinalColuna] == 'K')
 				cout<<"\n\nXEQUE MATE!!!\n"<<endl;
-			else if (tabuleiro[pfl][pfc] == ' '){
-				tabuleiro[pfl][pfc] = pOrigem;
-				tabuleiro[pol][poc] = ' ';
+			else if (tabuleiro[pecaFinalLinha][pecaFinalColuna] == ' '){
+				tabuleiro[pecaFinalLinha][pecaFinalColuna] = pOrigem;
+				tabuleiro[pecaOrigemLinha][pecaOrigemColuna] = ' ';
 			}else{
-				tabuleiro[pfl][pfc] = pOrigem;
-				tabuleiro[pol][poc] = ' ';
+				tabuleiro[pecaFinalLinha][pecaFinalColuna] = pOrigem;
+				tabuleiro[pecaOrigemLinha][pecaOrigemColuna] = ' ';
 			}
 		}
-		cout<<"Cê removeu: ";
-		vPeca(pecaSaiu);
-		saiu(pecaSaiu, bf, pf);
-		cout<<"peças retirada foi "<<pecaSaiu;
-	} while (pecaSaiu != 'k' || pecaSaiu != 'K');
-
-
+		if(pecaSaiu == 'k' || pecaSaiu == 'K'){
+		    exit(0);
+		}
+	}while (pecaSaiu != 'k' || pecaSaiu != 'K');
+    
     return 0;
 }
