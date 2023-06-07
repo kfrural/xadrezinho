@@ -80,29 +80,10 @@ void saiu(char peca, char *brancaFora, char *pretaFora){
 	}
 	cout<<endl;
 }
+char tabuleiro[8][8];
 
-int main()
-{
-    void vPeca(char peca);
-	void vTabuleiro(char peca[8][8]);
-	void saiu(char pecaSaiu, char *pf, char *bf);
-	char tabuleiro[8][8];
-	char pecaSaiu;
-	char pretaSaiu[16] = {'x'};
-	char brancaSaiu[16] = {'x'};
-	char *brancaFora;
-	char *pretaFora;
-	char pOrigem;
-	char pFinal;
-	int pecaOrigemLinha=0;
-	int pecaOrigemColuna=0;
-	int pecaFinalLinha=0;
-	int pecaFinalColuna=0;
-	int player=1;
-	pretaFora = pretaSaiu;
-	brancaFora = brancaSaiu;
-	
-	tabuleiro[0][0] = 'T'; // torre
+void printTabuleiro(){
+    tabuleiro[0][0] = 'T'; // torre
 	tabuleiro[0][1] = 'C'; // cavalo
 	tabuleiro[0][2] = 'B'; // bispo
 	tabuleiro[0][3] = 'Q'; // rainha
@@ -136,6 +117,32 @@ int main()
 	tabuleiro[7][7] = 't';
 	
 	cout<<"\n\n\n\n \t\t|\t\t P=Peao\t\t\t|\n\t\t|\t\t T=Torre\t\t|\n\t\t|\t\t C=Cavalo\t\t|\n\t\t|\t\t B=Bispo\t\t|\n\t\t|\t\t K=Rei\t\t\t|\n\t\t|\t\t Q=Rainha\t\t|\n\t\t\t\t"<<endl;
+	
+}
+
+
+
+int main()
+{
+    void vPeca(char peca);
+	void vTabuleiro(char peca[8][8]);
+	void saiu(char pecaSaiu, char *pretaFora, char *brancaFora);
+	char pecaSaiu;
+	char pretaSaiu[16] = {'x'};
+	char brancaSaiu[16] = {'x'};
+	char *brancaFora;
+	char *pretaFora;
+	char pOrigem;
+	char pFinal;
+	int pecaOrigemLinha=0;
+	int pecaOrigemColuna=0;
+	int pecaFinalLinha=0;
+	int pecaFinalColuna=0;
+	int player=1;
+	pretaFora = pretaSaiu;
+	brancaFora = brancaSaiu;
+	
+	printTabuleiro();
 	
 	for (int i=2;i<6;i++){
 		for (int j=0;j<8;j++){
