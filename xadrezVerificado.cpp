@@ -76,12 +76,12 @@ bool verificaJogadorTimeCorreto(int l, int c, int player){
     }
 }
 
-bool verificarMovimentoPeao(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool verificarMovimentoPeao(int l_origem, int c_origem, int l_destino, int c_destino){
     int player = isupper(tabuleiro[l_origem][c_origem]) ? 1 : -1;
     int direcao = player > 0 ? -1 : 1;
 
-    if (l_destino == l_origem + direcao) {
-        if (c_destino == c_origem && tabuleiro[l_destino][c_destino] == ' ') {
+    if(l_destino == l_origem + direcao){
+        if(c_destino == c_origem && tabuleiro[l_destino][c_destino] == ' '){
             return true;
         }else if(abs(c_destino - c_origem) == 1 && isupper(tabuleiro[l_destino][c_destino]) != player){
             return true;
@@ -93,13 +93,13 @@ bool verificarMovimentoPeao(int l_origem, int c_origem, int l_destino, int c_des
     return false;
 }
 
-bool verificarMovimentoTorre(int l_origem, int c_origem, int l_destino, int c_destino) {
-    if (l_destino == l_origem || c_destino == c_origem) {
-        int delta_l = (l_destino > l_origem) - (l_destino < l_origem);
-        int delta_c = (c_destino > c_origem) - (c_destino < c_origem);
+bool verificarMovimentoTorre(int l_origem, int c_origem, int l_destino, int c_destino){
+    if(l_destino == l_origem || c_destino == c_origem){
+        int movimento_l = (l_destino > l_origem) - (l_destino < l_origem);
+        int movimento_c = (c_destino > c_origem) - (c_destino < c_origem);
 
-        for (int l = l_origem + delta_l, c = c_origem + delta_c; l != l_destino || c != c_destino; l += delta_l, c += delta_c) {
-            if (tabuleiro[l][c] != ' ') {
+        for(int l = l_origem + movimento_l, c = c_origem + movimento_c; l != l_destino || c != c_destino; l += movimento_l, c += movimento_c){
+            if(tabuleiro[l][c] != ' '){
                 return false;
             }
         }
@@ -110,7 +110,7 @@ bool verificarMovimentoTorre(int l_origem, int c_origem, int l_destino, int c_de
     return false;
 }
 
-bool verificarMovimentoCavalo(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool verificarMovimentoCavalo(int l_origem, int c_origem, int l_destino, int c_destino){
     int movimento_l = abs(l_destino - l_origem);
     int movimento_c = abs(c_destino - c_origem);
 
@@ -123,16 +123,16 @@ bool verificarMovimentoCavalo(int l_origem, int c_origem, int l_destino, int c_d
     return false;
 }
 
-bool verificarMovimentoBispo(int l_origem, int c_origem, int l_destino, int c_destino) {
-    int delta_l = abs(l_destino - l_origem);
-    int delta_c = abs(c_destino - c_origem);
+bool verificarMovimentoBispo(int l_origem, int c_origem, int l_destino, int c_destino){
+    int movimento_l = abs(l_destino - l_origem);
+    int movimento_c = abs(c_destino - c_origem);
 
-    if(delta_l == delta_c) {
-        int delta_l_dir = (l_destino > l_origem) - (l_destino < l_origem);
-        int delta_c_dir = (c_destino > c_origem) - (c_destino < c_origem);
+    if(movimento_l == movimento_c){
+        int movimento_l_dir = (l_destino > l_origem) - (l_destino < l_origem);
+        int movimento_c_dir = (c_destino > c_origem) - (c_destino < c_origem);
 
-        for(int l = l_origem + delta_l_dir, c = c_origem + delta_c_dir; l != l_destino || c != c_destino; l += delta_l_dir, c += delta_c_dir){
-            if (tabuleiro[l][c] != ' ') {
+        for(int l = l_origem + movimento_l_dir, c = c_origem + movimento_c_dir; l != l_destino || c != c_destino; l += movimento_l_dir, c += movimento_c_dir){
+            if(tabuleiro[l][c] != ' '){
                 return false;
             }
         }
@@ -143,16 +143,16 @@ bool verificarMovimentoBispo(int l_origem, int c_origem, int l_destino, int c_de
     return false;
 }
 
-bool verificarMovimentoRainha(int l_origem, int c_origem, int l_destino, int c_destino) {
-    int delta_l = abs(l_destino - l_origem);
-    int delta_c = abs(c_destino - c_origem);
+bool verificarMovimentoRainha(int l_origem, int c_origem, int l_destino, int c_destino){
+    int movimento_l = abs(l_destino - l_origem);
+    int movimento_c = abs(c_destino - c_origem);
 
-    if (delta_l == delta_c) {
-        int delta_l_dir = (l_destino > l_origem) - (l_destino < l_origem);
-        int delta_c_dir = (c_destino > c_origem) - (c_destino < c_origem);
+    if(movimento_l == movimento_c){
+        int movimento_l_dir = (l_destino > l_origem) - (l_destino < l_origem);
+        int movimento_c_dir = (c_destino > c_origem) - (c_destino < c_origem);
 
-       for (int l = l_origem + delta_l_dir, c = c_origem + delta_c_dir; l != l_destino || c != c_destino; l += delta_l_dir, c += delta_c_dir) {
-            if (tabuleiro[l][c] != ' ') {
+       for(int l = l_origem + movimento_l_dir, c = c_origem + movimento_c_dir; l != l_destino || c != c_destino; l += movimento_l_dir, c += movimento_c_dir){
+            if(tabuleiro[l][c] != ' '){
                 return false;
             }
         }
@@ -160,12 +160,12 @@ bool verificarMovimentoRainha(int l_origem, int c_origem, int l_destino, int c_d
         return true;
     }
 
-    if (l_destino == l_origem || c_destino == c_origem) {
-        int delta_l_dir = (l_destino > l_origem) - (l_destino < l_origem);
-        int delta_c_dir = (c_destino > c_origem) - (c_destino < c_origem);
+    if(l_destino == l_origem || c_destino == c_origem){
+        int movimento_l_dir = (l_destino > l_origem) - (l_destino < l_origem);
+        int movimento_c_dir = (c_destino > c_origem) - (c_destino < c_origem);
 
-       for (int l = l_origem + delta_l_dir, c = c_origem + delta_c_dir; l != l_destino || c != c_destino; l += delta_l_dir, c += delta_c_dir) {
-            if (tabuleiro[l][c] != ' ') {
+       for(int l = l_origem + movimento_l_dir, c = c_origem + movimento_c_dir; l != l_destino || c != c_destino; l += movimento_l_dir, c += movimento_c_dir){
+            if(tabuleiro[l][c] != ' '){
                 return false;
             }
         }
@@ -176,11 +176,11 @@ bool verificarMovimentoRainha(int l_origem, int c_origem, int l_destino, int c_d
     return false;
 }
 
-bool verificarMovimentoRei(int l_origem, int c_origem, int l_destino, int c_destino) {
-    int delta_l = abs(l_destino - l_origem);
-    int delta_c = abs(c_destino - c_origem);
+bool verificarMovimentoRei(int l_origem, int c_origem, int l_destino, int c_destino){
+    int movimento_l = abs(l_destino - l_origem);
+    int movimento_c = abs(c_destino - c_origem);
 
-    if ((delta_l <= 1 && delta_c <= 1) && (delta_l != 0 || delta_c != 0)) {
+    if((movimento_l <= 1 && movimento_c <= 1) && (movimento_l != 0 || movimento_c != 0)){
         return true;
     }
 
@@ -202,7 +202,7 @@ void escolhaJogada(int player){
                 cin >> c_origem;
                 --l_origem;
                 --c_origem;
-                if (l_origem < 0 || c_origem < 0 ){
+                if(l_origem < 0 || c_origem < 0 ){
                     cout <<"Posicao invalida"<<endl;
                     cout <<"Digite novamente"<<endl;
                 } 
@@ -210,7 +210,7 @@ void escolhaJogada(int player){
                     cout <<"Voce esta mexendo em peca que nao eh sua!"<<endl;
                     cout<<"Digite novamente"<<endl;
                 }  
-			}while (!isupper(tabuleiro[l_origem][c_origem]));
+			}while(!isupper(tabuleiro[l_origem][c_origem]));
 			do{
 			    cout << "Linha destino : ";
                 cin >> l_destino;
@@ -218,7 +218,7 @@ void escolhaJogada(int player){
                 cin >> c_destino;
                 --l_destino;
                 --c_destino;
-                if (l_destino < 0 || c_destino < 0 ){
+                if(l_destino < 0 || c_destino < 0 ){
                     cout <<"Posicao invalida"<<endl;
                     cout <<"Digite novamente"<<endl;
                 }
@@ -227,7 +227,7 @@ void escolhaJogada(int player){
                     cout<<"Digite novamente"<<endl;
                 }
                 char peca = tabuleiro[l_origem][c_origem];
-                switch (peca) {
+                switch (peca){
                     case 'P':
                         movimentoValido = verificarMovimentoPeao(l_origem, c_origem, l_destino, c_destino);
                         break;
@@ -251,23 +251,23 @@ void escolhaJogada(int player){
                         break;
                 }
 
-                if (!movimentoValido) {
+                if(!movimentoValido){
                     cout << "Movimento invalido para a peca selecionada!" << endl;
                 }
 
-            } while (!movimentoValido);
+            }while(!movimentoValido);
 			player = -1;
 			system("clear");
-        }else {
+        }else{
             cout<<"JOGADOR 02\nEscolha uma peça preto aí sô"<<endl;
             do{
-               cout << "Linha origem : ";
+                cout << "Linha origem : ";
                 cin >> l_origem;
                 cout <<"Coluna origem: ";
                 cin >> c_origem;
                 --l_origem;
                 --c_origem;
-                if (l_origem < 0 || c_origem < 0 ){
+                if(l_origem < 0 || c_origem < 0 ){
                     cout <<"Posicao invalida"<<endl;
                     cout <<"Digite novamente"<<endl;
                 } 
@@ -283,16 +283,16 @@ void escolhaJogada(int player){
                 cin >> c_destino;
                 --l_destino;
                 --c_destino;
-                if (l_destino < 0 || c_destino < 0 ){
+                if(l_destino < 0 || c_destino < 0 ){
                     cout <<"Posicao invalida"<<endl;
                     cout <<"Digite novamente"<<endl;
                 }
                 if(!isupper(tabuleiro[l_destino][c_destino])){ 
                     cout <<"Voce esta mexendo em peca que nao eh sua!"<<endl;
-                    cout<<"Digite novamente"<<endl;
+                    cout <<"Digite novamente"<<endl;
                 } 
                 char peca = tabuleiro[l_origem][c_origem];
-                switch (peca) {
+                switch (peca){
                     case 'P':
                         movimentoValido = verificarMovimentoPeao(l_origem, c_origem, l_destino, c_destino);
                         break;
@@ -316,7 +316,7 @@ void escolhaJogada(int player){
                         break;
                 }
 
-                if (movimentoValido) {
+                if(movimentoValido){
                     cout << "Movimento invalido para a peca selecionada!" << endl;
                 }
             }while(isupper(tabuleiro[l_destino][c_destino]));
