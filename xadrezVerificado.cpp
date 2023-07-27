@@ -10,9 +10,9 @@ void imprimirTabuleiro(char peca[8][8]){
     cout<<"\n\nPeças brancas"<<endl;
     cout<<"    1   2   3   4   5   6   7   8"<<endl;
     cout<<"  --------------------------------"<<endl;
-    for (int i=0;i<8;i++){
+    for(int i=0;i<8;i++){
         cout<<i+1<<"| ";
-        for (int j=0;j<8;j++){
+        for(int j=0;j<8;j++){
             cout<<"["<<peca[i][j]<<"] ";
         }
         cout<<endl;
@@ -60,8 +60,8 @@ void criarTabuleiro(){
     cout<<"\n\n\n\n \t\t|\t\t P=Peao\t\t\t|\n\t\t|\t\t T=Torre\t\t|\n\t\t|\t\t C=Cavalo\t\t|\n\t\t|\t\t B=Bispo\t\t|\n\t\t|\t\t K=Rei\t\t\t|\n\t\t|\t\t Q=Rainha\t\t|\n\t\t\t\t"<<endl;
     
 
-    for (int i=2;i<6;i++){
-        for (int j=0;j<8;j++){
+    for(int i=2;i<6;i++){
+        for(int j=0;j<8;j++){
             tabuleiro[i][j] = ' ';
         }
     }
@@ -69,7 +69,7 @@ void criarTabuleiro(){
 }
 
 bool verificaJogadorTimeCorreto(int l, int c, int player){
-    if (isupper(tabuleiro[l][c])==1 && player == 1){
+    if(isupper(tabuleiro[l][c])==1 && player == 1){
         return true;
     }else{
         return false;
@@ -78,7 +78,7 @@ bool verificaJogadorTimeCorreto(int l, int c, int player){
 
 bool verificarMovimentoPeao(int l_origem, int c_origem, int l_destino, int c_destino){
     int player = isupper(tabuleiro[l_origem][c_origem]) ? 1 : -1;
-    int direcao = player > 0 ? -1 : 1;
+    int direcao = player > 0 ? 1 : 1;
 
     if(l_destino == l_origem + direcao){
         if(c_destino == c_origem && tabuleiro[l_destino][c_destino] == ' '){
