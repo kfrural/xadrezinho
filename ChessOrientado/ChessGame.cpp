@@ -1,9 +1,8 @@
 #include "ChessGame.h"
 
-char tabuleiro[8][8];
-int l_origem, l_destino, c_origem, c_destino;
 
-void imprimirTabuleiro(char peca[8][8]) {
+
+void ChessGame::imprimirTabuleiro(char peca[8][8]) {
    cout<<"\n\nPeças brancas"<<endl;
     cout<<"    1   2   3   4   5   6   7   8"<<endl;
     cout<<"  --------------------------------"<<endl;
@@ -17,7 +16,7 @@ void imprimirTabuleiro(char peca[8][8]) {
     cout<<"Peças pretas\n"<<endl;
 }
 
-void criarTabuleiro() {
+void ChessGame::criarTabuleiro() {
    tabuleiro[0][0] = 'T'; // torre
     tabuleiro[0][1] = 'C'; // cavalo
     tabuleiro[0][2] = 'B'; // bispo
@@ -61,7 +60,7 @@ void criarTabuleiro() {
     }
 }
 
-bool verificaJogadorTimeCorreto(int l, int c, int player) {
+bool ChessGame::verificaJogadorTimeCorreto(int l, int c, int player) {
     if(isupper(tabuleiro[l][c])==1 && player == 1){
         return true;
     }else{
@@ -69,7 +68,7 @@ bool verificaJogadorTimeCorreto(int l, int c, int player) {
     }
 }
 
-bool verificarMovimentoPeao(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool ChessGame::verificarMovimentoPeao(int l_origem, int c_origem, int l_destino, int c_destino) {
    int player = isupper(tabuleiro[l_origem][c_origem]) ? 1 : -1;
     int direcao = player > 0 ? 1 : 1;
 
@@ -86,7 +85,7 @@ bool verificarMovimentoPeao(int l_origem, int c_origem, int l_destino, int c_des
     return false;
 }
 
-bool verificarMovimentoTorre(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool ChessGame::verificarMovimentoTorre(int l_origem, int c_origem, int l_destino, int c_destino) {
     if(l_destino == l_origem || c_destino == c_origem){
         int movimento_l = (l_destino > l_origem) - (l_destino < l_origem);
         int movimento_c = (c_destino > c_origem) - (c_destino < c_origem);
@@ -103,7 +102,7 @@ bool verificarMovimentoTorre(int l_origem, int c_origem, int l_destino, int c_de
     return false;
 }
 
-bool verificarMovimentoCavalo(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool ChessGame::verificarMovimentoCavalo(int l_origem, int c_origem, int l_destino, int c_destino) {
    int movimento_l = abs(l_destino - l_origem);
     int movimento_c = abs(c_destino - c_origem);
 
@@ -116,7 +115,7 @@ bool verificarMovimentoCavalo(int l_origem, int c_origem, int l_destino, int c_d
     return false;
 }
 
-bool verificarMovimentoBispo(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool ChessGame::verificarMovimentoBispo(int l_origem, int c_origem, int l_destino, int c_destino) {
    int movimento_l = abs(l_destino - l_origem);
     int movimento_c = abs(c_destino - c_origem);
 
@@ -136,7 +135,7 @@ bool verificarMovimentoBispo(int l_origem, int c_origem, int l_destino, int c_de
     return false;
 }
 
-bool verificarMovimentoRainha(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool ChessGame::verificarMovimentoRainha(int l_origem, int c_origem, int l_destino, int c_destino) {
    int movimento_l = abs(l_destino - l_origem);
     int movimento_c = abs(c_destino - c_origem);
 
@@ -169,7 +168,7 @@ bool verificarMovimentoRainha(int l_origem, int c_origem, int l_destino, int c_d
     return false;
 }
 
-bool verificarMovimentoRei(int l_origem, int c_origem, int l_destino, int c_destino) {
+bool ChessGame::verificarMovimentoRei(int l_origem, int c_origem, int l_destino, int c_destino) {
    int movimento_l = abs(l_destino - l_origem);
     int movimento_c = abs(c_destino - c_origem);
 
@@ -180,7 +179,7 @@ bool verificarMovimentoRei(int l_origem, int c_origem, int l_destino, int c_dest
     return false;
 }
 
-void escolhaJogada(int player) {
+void ChessGame::escolhaJogada(int player) {
     char pecaSaiu;
     bool movimentoValido = false;
     do{
@@ -334,7 +333,7 @@ void escolhaJogada(int player) {
 
 }
 
-void movimentoDaJogada(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+void ChessGame::movimentoDaJogada(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
    char peca = tabuleiro[linhaOrigem][colunaOrigem];    
     tabuleiro[linhaDestino][colunaDestino] = peca;
 
