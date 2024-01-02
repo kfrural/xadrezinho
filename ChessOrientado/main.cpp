@@ -2,14 +2,15 @@
 
 int main()
 {
-   criarTabuleiro();
-   imprimirTabuleiro(tabuleiro);
+    ChessGame ChessGame;
+    ChessGame.criarTabuleiro();
+    ChessGame.imprimirTabuleiro(ChessGame.tabuleiro);
 
    int player = 1;
    do{               
-       escolhaJogada(player);
-       movimentoDaJogada(l_origem, c_origem, l_destino, c_destino);
-       imprimirTabuleiro(tabuleiro);
+       ChessGame.escolhaJogada(player);
+       ChessGame.movimentoDaJogada(ChessGame.l_origem, ChessGame.c_origem, ChessGame.l_destino, ChessGame.c_destino);
+       ChessGame.imprimirTabuleiro(ChessGame.tabuleiro);
        player *= -1;   
    }while(true); 
 
