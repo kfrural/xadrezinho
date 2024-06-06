@@ -1,5 +1,13 @@
 package classes;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author kfrural
@@ -8,11 +16,11 @@ public class Torre extends Peca {
 private String iconPath;
 
     public Torre(int linha, int coluna, boolean isBranca) {
-        super(linha, coluna, isBranca);
+         super(linha, coluna, isBranca);
         if (isBranca) {
             iconPath = "src/main/resources/images/torreBranca.png";
         } else {
-            iconPath = "src/main/resources/images/torrePreta.png";
+            iconPath = "src/main/resources/images/torrePreta.png"; 
         }
     }
 

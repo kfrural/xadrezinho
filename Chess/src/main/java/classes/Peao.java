@@ -3,13 +3,9 @@ package classes;
 public class Peao extends Peca {
     private String iconPath;
 
-    public Peao(int linha, int coluna, boolean isBranca) {
+   public Peao(int linha, int coluna, boolean isBranca) {
         super(linha, coluna, isBranca);
-        if (isBranca) {
-            iconPath = "src/main/resources/images/peaoBranco.png";
-        } else {
-            iconPath = "src/main/resources/images/peaoPreto.png";
-        }
+        iconPath = isBranca ? "src/main/resources/images/peaoBranco.png" : "src/main/resources/images/peaoPreto.png";
     }
 
     @Override
@@ -32,6 +28,9 @@ public class Peao extends Peca {
             Peca destino = tabuleiro[novoX][novoY];
             return destino != null && destino.getIsBranca() != getIsBranca();
         }
+        else if(novoX == getLinha() + 2 * direcao && getLinha() == 1 && tabuleiro[getLinha() + direcao][getColuna()] == null && tabuleiro[novoX][novoY] == null){
+        return true;
+    }
 
         return false;
     }

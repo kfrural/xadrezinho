@@ -58,7 +58,7 @@ public class Tabuleiro {
     return false;
 }
  
- public boolean verificarFimDeJogo() {
+public boolean verificarFimDeJogo() {
     boolean reiBrancoCapturado = true;
     boolean reiPretoCapturado = true;
 
@@ -84,7 +84,7 @@ public class Tabuleiro {
         }
     }
 
-    // Se algum dos reis foi capturado, o jogo termina
+    // Se o rei branco foi capturado ou o rei preto foi capturado, o jogo termina
     return reiBrancoCapturado || reiPretoCapturado;
 }
  
