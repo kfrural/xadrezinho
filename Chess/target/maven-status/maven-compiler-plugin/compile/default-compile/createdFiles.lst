@@ -1,0 +1,12 @@
+gui/Jogo.class
+classes/Rainha.class
+classes/Cavalo.class
+gui/Jogo$OuvidorBotao.class
+classes/Peao.class
+classes/Tabuleiro.class
+com/mycompany/chess/Chess.class
+classes/Bispo.class
+classes/Rei.class
+classes/Peca.class
+classes/Casa.class
+classes/Torre.class
